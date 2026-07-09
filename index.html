@@ -32,15 +32,15 @@
         .mob-close{position:absolute;top:20px;right:25px;background:none;border:none;color:var(--t);font-size:2rem;cursor:pointer}
 
         .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:0 5%;overflow:hidden;background:#0c0a08}
-        .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,8,0.0) 0%,rgba(12,10,8,0.15) 40%,rgba(12,10,8,0.5) 75%,rgba(12,10,8,0.92) 100%);z-index:1}
-        .hero-bg-img{position:absolute;inset:0;background:url('img/hero-bg.jpg') center/cover no-repeat;z-index:0}
-        .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,var(--bg));z-index:0}
+        .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,8,0.0) 0%,rgba(12,10,8,0.2) 50%,rgba(12,10,8,0.85) 100%);z-index:1}
+        .hero-bg-img{position:absolute;inset:0;background:url('img/hero-bg2.jpg') center/cover no-repeat;z-index:0}
+        .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:150px;background:linear-gradient(transparent,var(--bg));z-index:0}
         .hero-content{position:relative;z-index:2}
         .hero-logo{margin-bottom:25px}
-        .hero-logo img{height:clamp(100px,20vw,180px);filter:drop-shadow(0 0 50px rgba(212,160,23,0.5)) drop-shadow(0 10px 30px rgba(0,0,0,0.8));border-radius:12px}
-        .hero-sub{font-size:1rem;color:var(--tm);letter-spacing:4px;text-transform:uppercase;margin-bottom:10px;text-shadow:0 2px 10px rgba(0,0,0,0.8)}
+        .hero-logo img{height:clamp(110px,22vw,200px);filter:drop-shadow(0 0 60px rgba(212,160,23,0.5)) drop-shadow(0 10px 40px rgba(0,0,0,0.9));border-radius:12px}
+        .hero-sub{font-size:1rem;color:var(--tm);letter-spacing:4px;text-transform:uppercase;margin-bottom:10px;text-shadow:0 2px 15px rgba(0,0,0,0.9)}
         .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,11vw,8rem);line-height:.85;letter-spacing:8px;margin-bottom:15px;color:var(--gold);text-shadow:0 0 60px rgba(212,160,23,0.5),0 4px 30px rgba(0,0,0,0.9),4px 4px 0 #8b6914}
-        .hero-desc{font-size:1.05rem;color:var(--tm);line-height:1.7;margin-bottom:35px;max-width:500px;margin-left:auto;margin-right:auto;text-shadow:0 2px 10px rgba(0,0,0,0.8)}
+        .hero-desc{font-size:1.05rem;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:35px;max-width:500px;margin-left:auto;margin-right:auto;text-shadow:0 2px 15px rgba(0,0,0,0.9)}
         .hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
         .btn{padding:16px 32px;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;border:none;cursor:pointer}
         .btn-g{background:linear-gradient(135deg,var(--gold),#b8860b);color:var(--bg);box-shadow:0 4px 25px rgba(212,160,23,0.3)}
@@ -136,8 +136,10 @@
         .f-links a:hover{color:var(--gold)}
         .f-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03);color:var(--tm);font-size:.8rem}
 
-        .reveal{opacity:0;transform:translateY(25px);transition:all .6s ease}
-        .reveal.on{opacity:1;transform:translateY(0)}
+        .reveal{opacity:0;transform:translateY(40px);transition:all .7s cubic-bezier(.23,1,.32,1)}
+        .reveal.from-left{transform:translateX(-60px);opacity:0}
+        .reveal.from-right{transform:translateX(60px);opacity:0}
+        .reveal.on{opacity:1;transform:translate(0,0)}
 
         @media(max-width:1024px){.cgrid{grid-template-columns:1fr}.f-content{grid-template-columns:1fr;gap:30px}}
         @media(max-width:768px){.nav-links{display:none}.burger{display:block}.features{grid-template-columns:1fr}.hero-stats{flex-direction:column;gap:12px}.rgrid,.bsgrid{grid-template-columns:1fr}.hero{padding-top:80px;min-height:auto;padding-bottom:50px}.mi{grid-template-columns:auto 1fr auto}.mi-img{width:50px;height:50px}}
@@ -187,17 +189,17 @@
 </section>
 
 <section class="features">
-    <div class="feat">
+    <div class="feat reveal from-left">
         <div class="feat-ico">🥩</div>
         <h3>Świeże Mięso</h3>
         <p>Mięso z rożna, kurczak i wołowo-baranie mix. Każde danie na świeżo.</p>
     </div>
-    <div class="feat">
+    <div class="feat reveal">
         <div class="feat-ico">👨‍🍳</div>
         <h3>Turecki Kucharz</h3>
         <p>Dogan Aydin — prawdziwa turecka receptura. Smak bez kompromisów.</p>
     </div>
-    <div class="feat">
+    <div class="feat reveal from-right">
         <div class="feat-ico">🚚</div>
         <h3>Szybki Dowóz</h3>
         <p>Zamów przez Glovo — Prime = bezpłatna dostawa!</p>
@@ -210,21 +212,21 @@
         <h2>NAJPOPULARNIEJSZE <b>DANIA</b></h2>
     </div>
     <div class="bsgrid">
-        <div class="bscard">
+        <div class="bscard reveal from-left">
             <div class="bscard-img">
                 <img src="img/kebap-mega.jpg" alt="Kebap Mega">
                 <span class="bscard-badge">👑 Bestseller</span>
             </div>
             <div class="bscard-body"><h3>Kebap Mega</h3><div class="pr">35,00 zł</div></div>
         </div>
-        <div class="bscard">
+        <div class="bscard reveal">
             <div class="bscard-img">
                 <img src="img/pizza-mega.jpg" alt="Pizza Turecka">
                 <span class="bscard-badge">🔥 Mega</span>
             </div>
             <div class="bscard-body"><h3>Pizza Turecka Mega</h3><div class="pr">38,00 zł</div></div>
         </div>
-        <div class="bscard">
+        <div class="bscard reveal from-right">
             <div class="bscard-img">
                 <img src="img/durum-amer.jpg" alt="Durum">
                 <span class="bscard-badge">🍟 Z frytkami</span>
@@ -237,7 +239,7 @@
 <section class="fmenu">
     <div class="sec-hdr"><span class="tag">Kompletne Menu</span><h2>PEŁNE <b>MENU</b></h2></div>
 
-    <div class="mcat"><h3>🍔 KEBAP</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🍔 KEBAP</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/kebap-mega.jpg" alt=""></div><div><h4>Kebap Mega</h4></div><span class="mip">35 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/kebap-amer-mega.jpg" alt=""></div><div><h4>Kebap Amerykański w bułce Mega z frytkami</h4><p>W bułce z frytkami</p></div><span class="mip">35 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/kebap-normal.jpg" alt=""></div><div><h4>Kebap Normalny</h4></div><span class="mip">32 zł</span></div>
@@ -246,23 +248,23 @@
         <div class="mi"><div class="mi-img"><img src="img/bulka-sos.jpg" alt=""></div><div><h4>Bułka z sosem</h4></div><span class="mip">7 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🌯 DÜRÜM</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🌯 DÜRÜM</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/durum-mega.jpg" alt=""></div><div><h4>Durum Mega</h4></div><span class="mip">38 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/durum-amer.jpg" alt=""></div><div><h4>Durum Amerykański z frytkami</h4></div><span class="mip">38 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/durum-normal.jpg" alt=""></div><div><h4>Durum Normalny</h4></div><span class="mip">35 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🍕 PIZZA TURECKA</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🍕 PIZZA TURECKA</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/pizza-mega.jpg" alt=""></div><div><h4>Pizza Turecka Mega</h4></div><span class="mip">38 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/pizza-normal.jpg" alt=""></div><div><h4>Pizza Turecka Normalna</h4></div><span class="mip">35 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>📦 DÖNER BOX</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>📦 DÖNER BOX</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/box-mega.jpg" alt=""></div><div><h4>Doner Box Mega</h4><p>box mięso i frytki</p></div><span class="mip">35 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/box-normal.jpg" alt=""></div><div><h4>Doner Box Normalny</h4><p>box mięso i frytki</p></div><span class="mip">32 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🍽️ NA TALERZU</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🍽️ NA TALERZU</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/talerz-mega.jpg" alt=""></div><div><h4>Doner na talerzu mega</h4></div><span class="mip">45 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/chicken-mega.jpg" alt=""></div><div><h4>Doner Chicken Gemuse mega na talerzu</h4></div><span class="mip">45 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/talerz-mega.jpg" alt=""></div><div><h4>Doner na talerzu normalny</h4></div><span class="mip">43 zł</span></div>
@@ -271,19 +273,19 @@
         <div class="mi"><div class="mi-img"><img src="img/chicken-mega.jpg" alt=""></div><div><h4>Doner Chicken Gemuse mały na talerzu</h4></div><span class="mip">38 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🍟 SPEZI</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🍟 SPEZI</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/talerz-maly.jpg" alt=""></div><div><h4>Spezi na talerzu mega</h4><p>Frytki, mięso, surówki, ketchup, majonez, sosy</p></div><span class="mip">45 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/talerz-mega.jpg" alt=""></div><div><h4>Spezi na talerzu normalny</h4><p>Frytki, mięso, surówki, ketchup, majonez, sosy</p></div><span class="mip">43 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/talerz-mega.jpg" alt=""></div><div><h4>Spezi na talerzu mały</h4><p>Frytki, mięso, surówki, ketchup, majonez, sosy</p></div><span class="mip">38 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🎁 ZESTAWY</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🎁 ZESTAWY</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/zestaw3.jpg" alt=""></div><div><h4>Zestaw 3</h4><p>Durum lub Turecka Pizza, frytki, Coca-Cola 0,33l</p></div><span class="mip">52 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/zestaw1.jpg" alt=""></div><div><h4>Zestaw 1</h4><p>Kebap, frytki, Coca-Cola 0,33l</p></div><span class="mip">49 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/zestaw2.jpg" alt=""></div><div><h4>Zestaw 2</h4><p>Doner Kebap na talerzu, frytki, Coca-Cola 0,33l</p></div><span class="mip">48 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🌱 VEGE</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🌱 VEGE</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/falafel-talerz.jpg" alt=""></div><div><h4>Falafel na talerzu</h4><p>Kotleciki z ciecierzycy, frytki, surówka, sos</p></div><span class="mip">31 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/falafel-bulka.jpg" alt=""></div><div><h4>Falafel w bułce Mega</h4><p>Bułka z warzywami i sosem + kotleciki z ciecierzycy</p></div><span class="mip">28 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/falafel-durum.jpg" alt=""></div><div><h4>Falafel Durum</h4><p>Placek z warzywami i sosem + kotleciki z ciecierzycy</p></div><span class="mip">28 zł</span></div>
@@ -294,12 +296,12 @@
         <div class="mi"><div class="mi-img"><img src="img/gemuse-box.jpg" alt=""></div><div><h4>Gemuse Box</h4><p>Warzywa z frytkami + kotleciki z ciecierzycy + ser halloumi</p></div><span class="mip">23 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🍟 DODATKI</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🍟 DODATKI</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/frytki-mega.jpg" alt=""></div><div><h4>Frytki Mega</h4></div><span class="mip">18 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/frytki-normal.jpg" alt=""></div><div><h4>Frytki Normalne</h4></div><span class="mip">14 zł</span></div>
     </div></div>
 
-    <div class="mcat"><h3>🥤 NAPOJE</h3><div class="mlist">
+    <div class="mcat reveal from-left"><h3>🥤 NAPOJE</h3><div class="mlist">
         <div class="mi"><div class="mi-img"><img src="img/cola05.jpg" alt=""></div><div><h4>CocaCola 0,5l</h4></div><span class="mip">9 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/fanta05.jpg" alt=""></div><div><h4>Fanta 0,5l</h4></div><span class="mip">9 zł</span></div>
         <div class="mi"><div class="mi-img"><img src="img/sprite05.jpg" alt=""></div><div><h4>Sprite 0,5l</h4></div><span class="mip">9 zł</span></div>
@@ -315,7 +317,7 @@
 </section>
 
 <section class="order-sec" id="zamow">
-    <div class="order-box">
+    <div class="order-box reveal">
         <h2>ZAMÓW <b>TERAZ</b></h2>
         <p>96% klientów poleca! Bezpłatna dostawa z Prime.</p>
         <div class="order-btns">
@@ -328,9 +330,9 @@
 <section class="rev-sec" id="opinie">
     <div class="sec-hdr"><span class="tag">Opinie Gości</span><h2>CO MÓWIĄ <b>NASI GOŚCIE</b></h2></div>
     <div class="rgrid">
-        <div class="rcard"><div class="rstars">★★★★★</div><p class="rtxt">"Najlepszy kebab w okolicy! Mega porcje, mięso soczyste, sosy przepyszne."</p><div class="rauth"><div class="rav">M</div><div class="rauth-info"><h4>Marek K.</h4><p>Google Reviews</p></div></div></div>
-        <div class="rcard"><div class="rstars">★★★★★</div><p class="rtxt">"Zamawiam regularnie przez Glovo. Zawsze na czas, zawsze gorące. Polecam!"</p><div class="rauth"><div class="rav">A</div><div class="rauth-info"><h4>Ania W.</h4><p>Google Reviews</p></div></div></div>
-        <div class="rcard"><div class="rstars">★★★★★</div><p class="rtxt">"King Kebap to królestwo smaku! Obsługa na najwyższym poziomie, jedzenie świeże."</p><div class="rauth"><div class="rav">T</div><div class="rauth-info"><h4>Tomek P.</h4><p>Google Reviews</p></div></div></div>
+        <div class="rcard reveal"><div class="rstars">★★★★★</div><p class="rtxt">"Najlepszy kebab w okolicy! Mega porcje, mięso soczyste, sosy przepyszne."</p><div class="rauth"><div class="rav">M</div><div class="rauth-info"><h4>Marek K.</h4><p>Google Reviews</p></div></div></div>
+        <div class="rcard reveal"><div class="rstars">★★★★★</div><p class="rtxt">"Zamawiam regularnie przez Glovo. Zawsze na czas, zawsze gorące. Polecam!"</p><div class="rauth"><div class="rav">A</div><div class="rauth-info"><h4>Ania W.</h4><p>Google Reviews</p></div></div></div>
+        <div class="rcard reveal"><div class="rstars">★★★★★</div><p class="rtxt">"King Kebap to królestwo smaku! Obsługa na najwyższym poziomie, jedzenie świeże."</p><div class="rauth"><div class="rav">T</div><div class="rauth-info"><h4>Tomek P.</h4><p>Google Reviews</p></div></div></div>
     </div>
 </section>
 
@@ -338,10 +340,10 @@
     <div class="sec-hdr"><span class="tag">Kontakt</span><h2>ZNAJDŹ <b>NAS</b></h2></div>
     <div class="cgrid">
         <div class="cinfo">
-            <div class="ccard"><div class="cico">📍</div><div><h4>Adres</h4><p>Słubice</p></div></div>
-            <div class="ccard"><div class="cico">🛒</div><div><h4>Zamów online</h4><p><a href="https://glovoapp.com/pl/pl/slubice/stores/kingnazarkebap-sbe" target="_blank">Glovo — King Nazar Kebap</a></p></div></div>
-            <div class="ccard"><div class="cico">⭐</div><div><h4>Ocena</h4><p>96% klientów poleca</p></div></div>
-            <div class="ccard"><div class="cico">💰</div><div><h4>Ceny</h4><p>29-52 zł za osobę</p></div></div>
+            <div class="ccard reveal"><div class="cico">📍</div><div><h4>Adres</h4><p>Słubice</p></div></div>
+            <div class="ccard reveal"><div class="cico">🛒</div><div><h4>Zamów online</h4><p><a href="https://glovoapp.com/pl/pl/slubice/stores/kingnazarkebap-sbe" target="_blank">Glovo — King Nazar Kebap</a></p></div></div>
+            <div class="ccard reveal"><div class="cico">⭐</div><div><h4>Ocena</h4><p>96% klientów poleca</p></div></div>
+            <div class="ccard reveal"><div class="cico">💰</div><div><h4>Ceny</h4><p>29-52 zł za osobę</p></div></div>
         </div>
         <div class="map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2442.8!2d14.5589!3d52.3517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDIxJzA2LjEiTiAxNCszMSczMi4wIkU!5e0!3m2!1spl!2spl!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
@@ -366,4 +368,5 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 </script>
 </body>
 </html>
+
 
