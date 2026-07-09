@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Kebap - Najlepszy Kebab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--gold:#d4a017;--gold2:#f5c518;--bg:#0c0a08;--bg2:#161210;--card:#1c1814;--card2:#241f18;--t:#fff;--tm:#9a8a70;--g:#4caf50}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);overflow-x:hidden}
+        ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold),#b8860b);border-radius:4px}
+
+        .grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
+
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
+        nav.scrolled{background:rgba(12,10,8,0.97);backdrop-filter:blur(20px);padding:12px 5%;border-bottom:1px solid rgba(212,160,23,0.15)}
+        .logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);text-decoration:none;letter-spacing:3px;display:flex;align-items:center;gap:8px}
+        .logo .crown{font-size:1.3rem}
+        .nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+        .nav-links a{color:var(--t);text-decoration:none;font-weight:500;font-size:.9rem;transition:color .3s}
+        .nav-links a:not(.nav-call):hover{color:var(--gold)}
+        .nav-call{background:linear-gradient(135deg,var(--gold),#b8860b);color:var(--bg)!important;padding:10px 22px;border-radius:50px;font-weight:700;transition:all .3s;box-shadow:0 4px 20px rgba(212,160,23,0.25)}
+        .nav-call:hover{transform:scale(1.05);box-shadow:0 6px 30px rgba(212,160,23,0.4)}
+        .burger{display:none;background:none;border:none;color:var(--t);font-size:1.5rem;cursor:pointer}
+        .mob-menu{position:fixed;inset:0;background:rgba(12,10,8,0.98);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:25px;opacity:0;visibility:hidden;transition:all .4s}
+        .mob-menu.on{opacity:1;visibility:visible}
+        .mob-menu a{color:var(--t);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;transition:color .3s}
+        .mob-menu a:hover{color:var(--gold)}
+        .mob-close{position:absolute;top:20px;right:25px;background:none;border:none;color:var(--t);font-size:2rem;cursor:pointer}
+
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:0 5%;overflow:hidden}
+        .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,8,0.5),rgba(12,10,8,0.7) 50%,rgba(12,10,8,0.95));z-index:1}
+        .hero::after{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(212,160,23,0.1),transparent 60%);filter:blur(60px);z-index:0}
+        .hero-content{position:relative;z-index:2}
+        .crown-big{font-size:5rem;margin-bottom:10px;display:block;filter:drop-shadow(0 0 30px rgba(212,160,23,0.4));animation:crown-float 4s ease-in-out infinite}
+        @keyframes crown-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,9rem);line-height:.85;letter-spacing:6px;margin-bottom:15px;background:linear-gradient(180deg,var(--gold2),var(--gold),#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 4px 20px rgba(212,160,23,0.3))}
+        .hero-sub{font-size:1.2rem;color:var(--tm);letter-spacing:5px;text-transform:uppercase;margin-bottom:10px}
+        .hero-desc{font-size:1rem;color:var(--tm);line-height:1.7;margin-bottom:35px;max-width:500px;margin-left:auto;margin-right:auto}
+        .hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
+        .btn{padding:16px 32px;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;border:none;cursor:pointer}
+        .btn-g{background:linear-gradient(135deg,var(--gold),#b8860b);color:var(--bg);box-shadow:0 4px 25px rgba(212,160,23,0.3)}
+        .btn-g:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,160,23,0.5)}
+        .btn-ol{background:transparent;color:var(--t);border:2px solid rgba(212,160,23,0.4)}
+        .btn-ol:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,160,23,0.05)}
+        .hero-stats{display:flex;gap:40px;justify-content:center;margin-top:45px}
+        .st h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold)}
+        .st p{color:var(--tm);font-size:.8rem;letter-spacing:1px}
+
+        .features{padding:70px 5%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+        .feat{background:var(--card);padding:30px 22px;border-radius:16px;text-align:center;border:1px solid rgba(212,160,23,0.08);transition:all .4s;position:relative;overflow:hidden}
+        .feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+        .feat:hover::before{opacity:1}
+        .feat:hover{transform:translateY(-8px);border-color:rgba(212,160,23,0.2);box-shadow:0 15px 50px rgba(0,0,0,0.4)}
+        .feat-ico{width:65px;height:65px;background:rgba(212,160,23,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.7rem;border:1px solid rgba(212,160,23,0.15)}
+        .feat h3{font-size:1.1rem;margin-bottom:10px}
+        .feat p{color:var(--tm);line-height:1.6;font-size:.9rem}
+
+        .sec-hdr{text-align:center;margin-bottom:45px;position:relative;z-index:1}
+        .sec-hdr .tag{display:inline-block;background:rgba(212,160,23,0.1);color:var(--gold);padding:8px 22px;border-radius:50px;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;margin-bottom:15px;border:1px solid rgba(212,160,23,0.2)}
+        .sec-hdr h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:2px}
+        .sec-hdr h2 b{color:var(--gold)}
+
+        .bests{padding:70px 5%;background:linear-gradient(180deg,var(--bg),var(--bg2),var(--bg));position:relative}
+        .bsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+        .bscard{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid rgba(212,160,23,0.06);transition:all .4s;position:relative}
+        .bscard:hover{transform:translateY(-8px);box-shadow:0 15px 45px rgba(212,160,23,0.1);border-color:rgba(212,160,23,0.2)}
+        .bscard-img{height:200px;overflow:hidden;position:relative}
+        .bscard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+        .bscard:hover .bscard-img img{transform:scale(1.06)}
+        .bscard-badge{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,var(--gold),#b8860b);color:var(--bg);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:700}
+        .bscard-body{padding:20px}
+        .bscard-body h3{font-size:1.15rem;margin-bottom:6px}
+        .bscard-body p{color:var(--tm);font-size:.85rem;line-height:1.4;margin-bottom:15px}
+        .bscard-foot{display:flex;justify-content:space-between;align-items:center}
+        .pr{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold)}
+
+        .fmenu{padding:70px 5%;max-width:1100px;margin:0 auto;position:relative;z-index:1}
+        .mcat{margin-bottom:35px}
+        .mcat h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);border-bottom:2px solid rgba(212,160,23,0.12);padding-bottom:10px;margin-bottom:18px;letter-spacing:2px}
+        .mlist{display:grid;gap:10px}
+        .mi{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--card);padding:16px 20px;border-radius:12px;border:1px solid rgba(212,160,23,0.04);transition:all .3s}
+        .mi:hover{border-color:rgba(212,160,23,0.15);transform:translateX(4px)}
+        .mi h4{font-size:.95rem;margin-bottom:3px}
+        .mi p{color:var(--tm);font-size:.82rem}
+        .mip{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);white-space:nowrap}
+
+        .order-sec{padding:70px 5%;position:relative;z-index:1}
+        .order-box{max-width:700px;margin:0 auto;background:linear-gradient(145deg,var(--card),var(--bg2));border-radius:22px;padding:45px;border:1px solid rgba(212,160,23,0.15);text-align:center;position:relative}
+        .order-box h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;margin-bottom:12px;letter-spacing:2px}
+        .order-box h2 b{color:var(--gold)}
+        .order-box>p{color:var(--tm);font-size:1rem;margin-bottom:28px}
+        .order-btns{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+        .obtn{padding:16px 30px;border-radius:14px;font-size:1rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s;border:none;cursor:pointer}
+        .obtn-gold{background:linear-gradient(135deg,var(--gold),#b8860b);color:var(--bg)}
+        .obtn-gold:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(212,160,23,0.35)}
+        .obtn-glovo{background:#98c206;color:var(--bg)}
+        .obtn-glovo:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(152,194,6,0.4)}
+        .obtn-pyszne{background:#ff6b00;color:var(--bg)}
+        .obtn-pyszne:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(255,107,0,0.4)}
+
+        .rev-sec{padding:70px 5%;background:var(--bg2);position:relative;z-index:1}
+        .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+        .rcard{background:var(--card);padding:28px;border-radius:16px;border:1px solid rgba(212,160,23,0.05);transition:all .4s;position:relative}
+        .rcard::before{content:'"';position:absolute;top:10px;right:18px;font-size:4.5rem;color:rgba(212,160,23,0.06);font-family:serif;line-height:1}
+        .rcard:hover{transform:translateY(-5px);border-color:rgba(212,160,23,0.15)}
+        .rstars{color:#ffd700;font-size:1rem;margin-bottom:12px}
+        .rtxt{font-size:.95rem;line-height:1.7;margin-bottom:18px;color:rgba(255,255,255,0.85)}
+        .rauth{display:flex;align-items:center;gap:10px}
+        .rav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8860b);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:var(--bg)}
+        .rauth-info h4{font-size:.9rem;margin-bottom:2px}
+        .rauth-info p{color:var(--tm);font-size:.75rem}
+
+        .cta{padding:90px 5%;text-align:center;position:relative;z-index:1;overflow:hidden;background:linear-gradient(180deg,var(--bg2),var(--bg))}
+        .cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(212,160,23,0.08),transparent 60%)}
+        .cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);margin-bottom:15px;letter-spacing:2px;position:relative;z-index:1}
+        .cta h2 b{color:var(--gold)}
+        .cta>p{color:var(--tm);font-size:1rem;margin-bottom:30px;max-width:500px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+        .cta-btns{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;position:relative;z-index:1}
+
+        .contact{padding:70px 5%;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+        .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:start}
+        .cinfo{display:grid;gap:18px}
+        .ccard{background:var(--card);padding:22px;border-radius:16px;border:1px solid rgba(212,160,23,0.05);display:flex;gap:16px;transition:all .3s}
+        .ccard:hover{border-color:rgba(212,160,23,0.15);transform:translateX(5px)}
+        .cico{width:50px;height:50px;background:rgba(212,160,23,0.08);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;border:1px solid rgba(212,160,23,0.12)}
+        .ccard h4{font-size:.9rem;margin-bottom:5px}
+        .ccard p{color:var(--tm);font-size:.85rem}
+        .ccard a{color:var(--gold);text-decoration:none}
+        .ccard a:hover{text-decoration:underline}
+        .map{border-radius:16px;overflow:hidden;height:350px;border:1px solid rgba(212,160,23,0.06)}
+        .map iframe{width:100%;height:100%;border:none;filter:brightness(0.85) contrast(1.1)}
+
+        footer{background:#0a0806;padding:45px 5% 22px;border-top:1px solid rgba(212,160,23,0.06);position:relative;z-index:1}
+        .f-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:45px;margin-bottom:35px}
+        .f-brand h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);margin-bottom:10px;letter-spacing:2px}
+        .f-brand p{color:var(--tm);line-height:1.6;font-size:.85rem}
+        .f-links h4{font-size:.9rem;margin-bottom:15px}
+        .f-links ul{list-style:none}
+        .f-links li{margin-bottom:8px}
+        .f-links a{color:var(--tm);text-decoration:none;transition:color .3s;font-size:.85rem}
+        .f-links a:hover{color:var(--gold)}
+        .f-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03);color:var(--tm);font-size:.8rem}
+
+        .reveal{opacity:0;transform:translateY(25px);transition:all .6s ease}
+        .reveal.on{opacity:1;transform:translateY(0)}
+
+        @media(max-width:1024px){.cgrid{grid-template-columns:1fr}.f-content{grid-template-columns:1fr;gap:30px}}
+        @media(max-width:768px){.nav-links{display:none}.burger{display:block}.features{grid-template-columns:1fr}.hero-stats{flex-direction:column;gap:12px}.rgrid,.bsgrid{grid-template-columns:1fr}.hero{padding-top:80px;min-height:auto;padding-bottom:50px}}
+    </style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav id="nav">
+    <a href="#top" class="logo"><span class="crown">👑</span> KING KEBAP</a>
+    <ul class="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#opinie">Opinie</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="tel:000000000" class="nav-call">📞 Zamów</a></li>
+    </ul>
+    <button class="burger" onclick="document.getElementById('mob').classList.toggle('on')">☰</button>
+</nav>
+
+<div class="mob-menu" id="mob">
+    <button class="mob-close" onclick="document.getElementById('mob').classList.remove('on')">✕</button>
+    <a href="#menu" onclick="document.getElementById('mob').classList.remove('on')">Menu</a>
+    <a href="#opinie" onclick="document.getElementById('mob').classList.remove('on')">Opinie</a>
+    <a href="#kontakt" onclick="document.getElementById('mob').classList.remove('on')">Kontakt</a>
+    <a href="tel:000000000" onclick="document.getElementById('mob').classList.remove('on')">Zamów Teraz</a>
+</div>
+
+<section class="hero" id="top">
+    <div class="hero-content">
+        <span class="crown-big">👑</span>
+        <div class="hero-sub">Dogan Aydin</div>
+        <h1>KING<br>KEBAP</h1>
+        <p class="hero-desc">Prawdziwy smak tureckiego kebaba. Mięso z rożna, świeże składniki, sosy domowej roboty.</p>
+        <div class="hero-btns">
+            <a href="#zamow" class="btn btn-g">🛵 Zamów Teraz</a>
+            <a href="#menu" class="btn btn-ol">Zobacz Menu →</a>
+        </div>
+        <div class="hero-stats">
+            <div class="st"><h3>29-52zł</h3><p>Za osobę</p></div>
+            <div class="st"><h3>96%</h3><p>Ocena klientów</p></div>
+            <div class="st"><h3>PRIME</h3><p>Najlepsza jakość</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="features reveal">
+    <div class="feat">
+        <div class="feat-ico">🥩</div>
+        <h3>Świeże Mięso</h3>
+        <p>Mięso z rożna, kurczak i wołowo-baranie. Każde danie przygotowywane na miejscu.</p>
+    </div>
+    <div class="feat">
+        <div class="feat-ico">👨‍🍳</div>
+        <h3>Doświadczony Kucharz</h3>
+        <p>Dogan Aydin — mistrz tureckiej kuchni. Receptury z Turcji, smak bez kompromisów.</p>
+    </div>
+    <div class="feat">
+        <div class="feat-ico">🚴</div>
+        <h3>Szybki Dowóz</h3>
+        <p>Zamów telefonicznie lub przez Glovo i Pyszne.pl. Odbiór na miejscu lub dowóz.</p>
+    </div>
+</section>
+
+<section class="bests" id="menu">
+    <div class="sec-hdr reveal">
+        <span class="tag">👑 Bestsellery</span>
+        <h2>NAJPOPULARNIEJSZE <b>DANIA</b></h2>
+    </div>
+    <div class="bsgrid">
+        <div class="bscard reveal">
+            <div class="bscard-img">
+                <img src="https://images.unsplash.com/photo-1530469912745-a215c6b256ea?w=600&h=400&fit=crop" alt="Kebap Mega">
+                <span class="bscard-badge">👑 Bestseller</span>
+            </div>
+            <div class="bscard-body">
+                <h3>Kebap Mega</h3>
+                <p>Porządna porcja mięsa z rożna w bułce z surówkami i sosami</p>
+                <div class="bscard-foot"><span class="pr">35,00 zł</span></div>
+            </div>
+        </div>
+        <div class="bscard reveal">
+            <div class="bscard-img">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza Turecka">
+                <span class="bscard-badge">🔥 Mega</span>
+            </div>
+            <div class="bscard-body">
+                <h3>Pizza Turecka Mega</h3>
+                <p>Lahmacun z mięsem, warzywami i sosami</p>
+                <div class="bscard-foot"><span class="pr">38,00 zł</span></div>
+            </div>
+        </div>
+        <div class="bscard reveal">
+            <div class="bscard-img">
+                <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&h=400&fit=crop" alt="Durum">
+                <span class="bscard-badge">🍟 Z frytkami</span>
+            </div>
+            <div class="bscard-body">
+                <h3>Durum Amerykański</h3>
+                <p>Durum z mięsem, frytkami i surówkami</p>
+                <div class="bscard-foot"><span class="pr">38,00 zł</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="fmenu">
+    <div class="sec-hdr reveal">
+        <span class="tag">Kompletne Menu</span>
+        <h2>PEŁNE <b>MENU</b></h2>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🍔 KEBAP</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Kebap Mega</h4></div><span class="mip">35 zł</span></div>
+            <div class="mi"><div><h4>Kebap Amerykański w bułce Mega z frytkami</h4><p>W bułce z frytkami</p></div><span class="mip">35 zł</span></div>
+            <div class="mi"><div><h4>Kebap Normalny</h4></div><span class="mip">32 zł</span></div>
+            <div class="mi"><div><h4>Kebap Amerykański w bułce z frytkami</h4><p>W bułce z frytkami</p></div><span class="mip">32 zł</span></div>
+            <div class="mi"><div><h4>Kebap Szkolny</h4></div><span class="mip">29 zł</span></div>
+            <div class="mi"><div><h4>Bułka z sosem</h4></div><span class="mip">7 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🌯 DÜRÜM</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Durum Mega</h4></div><span class="mip">38 zł</span></div>
+            <div class="mi"><div><h4>Durum Amerykański z frytkami</h4></div><span class="mip">38 zł</span></div>
+            <div class="mi"><div><h4>Durum Normalny</h4></div><span class="mip">35 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🍕 PIZZA TURECKA</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Pizza Turecka Mega</h4></div><span class="mip">38 zł</span></div>
+            <div class="mi"><div><h4>Pizza Turecka Normalna</h4></div><span class="mip">35 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>📦 DÖNER BOX</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Doner Box Mega</h4><p>box mięso i frytki</p></div><span class="mip">35 zł</span></div>
+            <div class="mi"><div><h4>Doner Box Normalny</h4><p>box mięso i frytki</p></div><span class="mip">32 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🍽️ NA TALERZU</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Doner na talerzu mega</h4></div><span class="mip">45 zł</span></div>
+            <div class="mi"><div><h4>Doner Chicken Gemuse mega na talerzu</h4></div><span class="mip">45 zł</span></div>
+            <div class="mi"><div><h4>Doner na talerzu normalny</h4></div><span class="mip">43 zł</span></div>
+            <div class="mi"><div><h4>Doner Chicken Gemuse normalny na talerzu</h4></div><span class="mip">43 zł</span></div>
+            <div class="mi"><div><h4>Doner na talerzu mały</h4></div><span class="mip">38 zł</span></div>
+            <div class="mi"><div><h4>Doner Chicken Gemuse mały na talerzu</h4></div><span class="mip">38 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🍟 SPEZI</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Spezi na talerzu mega</h4><p>Talerz z frytkami, mięsem i surówkami polany ketchupem i majonezem oraz sosami</p></div><span class="mip">45 zł</span></div>
+            <div class="mi"><div><h4>Spezi na talerzu normalny</h4><p>Talerz z frytkami, mięsem i surówkami polany ketchupem i majonezem oraz sosami</p></div><span class="mip">43 zł</span></div>
+            <div class="mi"><div><h4>Spezi na talerzu mały</h4><p>Talerz z frytkami, mięsem i surówkami polany ketchupem i majonezem oraz sosami</p></div><span class="mip">38 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🎁 ZESTAWY</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Zestaw 3</h4><p>Durum lub Turecka Pizza, frytki, Coca-Cola 0,33l</p></div><span class="mip">52 zł</span></div>
+            <div class="mi"><div><h4>Zestaw 1</h4><p>Kebap, frytki, Coca-Cola 0,33l</p></div><span class="mip">49 zł</span></div>
+            <div class="mi"><div><h4>Zestaw 2</h4><p>Doner Kebap na talerzu, frytki, Coca-Cola 0,33l</p></div><span class="mip">48 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🌱 VEGE</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Falafel na talerzu</h4><p>Kotleciki z ciecierzycy, frytki, surówka, sos</p></div><span class="mip">31 zł</span></div>
+            <div class="mi"><div><h4>Falafel w bułce Mega</h4><p>Bułka z warzywami i sosem + kotleciki z ciecierzycy</p></div><span class="mip">28 zł</span></div>
+            <div class="mi"><div><h4>Falafel Durum</h4><p>Placek z warzywami i sosem + kotleciki z ciecierzycy</p></div><span class="mip">28 zł</span></div>
+            <div class="mi"><div><h4>Halloumi w bułce Mega</h4><p>Bułka z warzywami i sosem + zapiekany ser</p></div><span class="mip">28 zł</span></div>
+            <div class="mi"><div><h4>Falafel w bułce Normalny</h4><p>Bułka z warzywami i sosem + kotleciki z ciecierzycy</p></div><span class="mip">26 zł</span></div>
+            <div class="mi"><div><h4>Halloumi w bułce Normalny</h4><p>Bułka z warzywami i sosem + zapiekany ser</p></div><span class="mip">26 zł</span></div>
+            <div class="mi"><div><h4>Vege w bułce</h4><p>Bułka z warzywami i sosem</p></div><span class="mip">23 zł</span></div>
+            <div class="mi"><div><h4>Gemuse Box</h4><p>Warzywa z frytkami + kotleciki z ciecierzycy + ser halloumi</p></div><span class="mip">23 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🍟 DODATKI</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>Frytki Mega</h4></div><span class="mip">18 zł</span></div>
+            <div class="mi"><div><h4>Frytki Normalne</h4></div><span class="mip">14 zł</span></div>
+        </div>
+    </div>
+
+    <div class="mcat reveal">
+        <h3>🥤 NAPOJE</h3>
+        <div class="mlist">
+            <div class="mi"><div><h4>CocaCola 0,5l</h4></div><span class="mip">9 zł</span></div>
+            <div class="mi"><div><h4>Fanta 0,5l</h4></div><span class="mip">9 zł</span></div>
+            <div class="mi"><div><h4>Sprite 0,5l</h4></div><span class="mip">9 zł</span></div>
+            <div class="mi"><div><h4>Monster 0,5l</h4></div><span class="mip">9 zł</span></div>
+            <div class="mi"><div><h4>Kinley 0,5l</h4></div><span class="mip">9 zł</span></div>
+            <div class="mi"><div><h4>Ayran</h4></div><span class="mip">8 zł</span></div>
+            <div class="mi"><div><h4>Kolmis Ayran</h4></div><span class="mip">8 zł</span></div>
+            <div class="mi"><div><h4>CocaCola 0,33l</h4></div><span class="mip">7 zł</span></div>
+            <div class="mi"><div><h4>Fanta 0,33l</h4></div><span class="mip">7 zł</span></div>
+            <div class="mi"><div><h4>Sprite 0,33l</h4></div><span class="mip">7 zł</span></div>
+            <div class="mi"><div><h4>Cappy 0,33l</h4></div><span class="mip">6 zł</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="order-sec" id="zamow">
+    <div class="order-box">
+        <h2>ZAMÓW <b>TERAZ</b></h2>
+        <p>Zadzwoń lub zamów przez Glovo i Pyszne.pl</p>
+        <div class="order-btns">
+            <a href="tel:000000000" class="obtn obtn-gold">📞 Zadzwoń</a>
+            <a href="https://www.glovoapp.com/pl/pl/" target="_blank" class="obtn obtn-glovo">🟢 Glovo</a>
+            <a href="https://www.pyszne.pl/" target="_blank" class="obtn obtn-pyszne">🍕 Pyszne.pl</a>
+        </div>
+        <p style="color:var(--tm);font-size:.8rem;margin-top:15px">💡 W Glovo wpisz "King Kebap" i swój adres</p>
+    </div>
+</section>
+
+<section class="rev-sec" id="opinie">
+    <div class="sec-hdr reveal">
+        <span class="tag">Opinie Gości</span>
+        <h2>CO MÓWIĄ <b>NASI GOŚCIE</b></h2>
+    </div>
+    <div class="rgrid">
+        <div class="rcard reveal">
+            <div class="rstars">★★★★★</div>
+            <p class="rtxt">"Najlepszy kebab jaki jadłem! Mega porcje, mięso soczyste, sosy przepyszne. Polecam każdemu!"</p>
+            <div class="rauth"><div class="rav">M</div><div class="rauth-info"><h4>Marek K.</h4><p>Google Reviews</p></div></div>
+        </div>
+        <div class="rcard reveal">
+            <div class="rstars">★★★★★</div>
+            <p class="rtxt">"King Kebap to królestwo smaku! Obsługa na najwyższym poziomie, jedzenie zawsze świeże."</p>
+            <div class="rauth"><div class="rav">A</div><div class="rauth-info"><h4>Ania W.</h4><p>Google Reviews</p></div></div>
+        </div>
+        <div class="rcard reveal">
+            <div class="rstars">★★★★★</div>
+            <p class="rtxt">"Zamawiam regularnie przez Glovo. Zawsze na czas, zawsze gorące. Najlepszy kebab w mieście!"</p>
+            <div class="rauth"><div class="rav">T</div><div class="rauth-info"><h4>Tomek P.</h4><p>Google Reviews</p></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="cta-c reveal">
+        <h2>GŁODNY? <b>CZEKAMY</b> NA CIEBIE!</h2>
+        <p>Odwiedź nas lub zamów online. Prawdziwy turecki kebab w Twoim mieście.</p>
+        <div class="cta-btns">
+            <a href="tel:000000000" class="btn btn-g">📞 Zadzwoń Teraz</a>
+            <a href="#menu" class="btn btn-ol">📋 Zobacz Menu</a>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="kontakt">
+    <div class="sec-hdr reveal">
+        <span class="tag">Kontakt</span>
+        <h2>ZNAJDŹ <b>NAS</b></h2>
+    </div>
+    <div class="cgrid">
+        <div class="cinfo reveal">
+            <div class="ccard"><div class="cico">📍</div><div><h4>Adres</h4><p>Wpisz tutaj adres kebabu</p></div></div>
+            <div class="ccard"><div class="cico">📞</div><div><h4>Telefon</h4><p><a href="tel:000000000">Wpisz numer telefonu</a></p></div></div>
+            <div class="ccard"><div class="cico">⏰</div><div><h4>Godziny</h4><p>Wpisz godziny otwarcia</p></div></div>
+            <div class="ccard"><div class="cico">💰</div><div><h4>Ceny</h4><p>29-52 zł za osobę</p></div></div>
+        </div>
+        <div class="map reveal">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2442.8!2d14.5589!3d52.3517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDIxJzA2LjEiTiAxNCszMSczMi4wIkU!5e0!3m2!1spl!2spl!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="f-content">
+        <div class="f-brand">
+            <h3>👑 KING KEBAP</h3>
+            <p>Prawdziwy turecki kebab. Mięso z rożna, świeże składniki, sosy domowej roboty. Zamów przez telefon, Glovo lub Pyszne.pl.</p>
+        </div>
+        <div class="f-links">
+            <h4>Nawigacja</h4>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#opinie">Opinie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+        <div class="f-links">
+            <h4>Zamów online</h4>
+            <ul>
+                <li><a href="tel:000000000">Telefon</a></li>
+                <li><a href="https://www.glovoapp.com/pl/pl/" target="_blank">Glovo</a></li>
+                <li><a href="https://www.pyszne.pl/" target="_blank">Pyszne.pl</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="f-bottom">&copy; 2026 King Kebap. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
+const rev=()=>{document.querySelectorAll('.reveal').forEach(e=>{if(e.getBoundingClientRect().top<window.innerHeight-80)e.classList.add('on')})};
+window.addEventListener('scroll',rev);window.addEventListener('load',rev);
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+</script>
+</body>
+</html>
