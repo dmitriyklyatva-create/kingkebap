@@ -38,7 +38,8 @@
         .hero-content{position:relative;z-index:2}
         .crown-big{font-size:5rem;margin-bottom:10px;display:block;filter:drop-shadow(0 0 30px rgba(212,160,23,0.4));animation:crown-float 4s ease-in-out infinite}
         @keyframes crown-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-        .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,9rem);line-height:.85;letter-spacing:6px;margin-bottom:15px;background:linear-gradient(180deg,var(--gold2),var(--gold),#b8860b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 4px 20px rgba(212,160,23,0.3))}
+        .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,9rem);line-height:.85;letter-spacing:6px;margin-bottom:15px;color:var(--gold);text-shadow:0 0 40px rgba(212,160,23,0.3),3px 3px 0 #b8860b}
+        .hero h1 .eye{font-size:.7em;vertical-align:middle;margin:0 5px;filter:drop-shadow(0 0 15px rgba(30,100,200,0.5))}
         .hero-sub{font-size:1.2rem;color:var(--tm);letter-spacing:5px;text-transform:uppercase;margin-bottom:10px}
         .hero-desc{font-size:1rem;color:var(--tm);line-height:1.7;margin-bottom:35px;max-width:500px;margin-left:auto;margin-right:auto}
         .hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
@@ -157,7 +158,7 @@
 <div class="grain"></div>
 
 <nav id="nav">
-    <a href="#top" class="logo"><span class="crown">👑</span> KING KEBAP</a>
+    <a href="#top" class="logo">KING<span style="font-size:.9em;margin:0 3px">👁️</span>KEBAP</a>
     <ul class="nav-links">
         <li><a href="#menu">Menu</a></li>
         <li><a href="#opinie">Opinie</a></li>
@@ -177,9 +178,8 @@
 
 <section class="hero" id="top">
     <div class="hero-content">
-        <span class="crown-big">👑</span>
         <div class="hero-sub">Dogan Aydin</div>
-        <h1>KING<br>KEBAP</h1>
+        <h1>KING<span class="eye">👁️</span>KEBAP</h1>
         <p class="hero-desc">Prawdziwy smak tureckiego kebaba. Mięso z rożna, świeże składniki, sosy domowej roboty.</p>
         <div class="hero-btns">
             <a href="#zamow" class="btn btn-g">🛵 Zamów Teraz</a>
@@ -219,7 +219,7 @@
     <div class="bsgrid">
         <div class="bscard reveal">
             <div class="bscard-img">
-                <img src="https://images.unsplash.com/photo-1530469912745-a215c6b256ea?w=600&h=400&fit=crop" alt="Kebap Mega">
+                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&h=400&fit=crop" alt="Kebap Mega">
                 <span class="bscard-badge">👑 Bestseller</span>
             </div>
             <div class="bscard-body">
@@ -230,7 +230,7 @@
         </div>
         <div class="bscard reveal">
             <div class="bscard-img">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza Turecka">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=400&fit=crop" alt="Pizza Turecka">
                 <span class="bscard-badge">🔥 Mega</span>
             </div>
             <div class="bscard-body">
@@ -241,7 +241,7 @@
         </div>
         <div class="bscard reveal">
             <div class="bscard-img">
-                <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&h=400&fit=crop" alt="Durum">
+                <img src="https://images.unsplash.com/photo-1529006557810-274b9b3fc032?w=600&h=400&fit=crop" alt="Durum">
                 <span class="bscard-badge">🍟 Z frytkami</span>
             </div>
             <div class="bscard-body">
@@ -435,7 +435,7 @@
 <footer>
     <div class="f-content">
         <div class="f-brand">
-            <h3>👑 KING KEBAP</h3>
+            <h3>KING<span style="font-size:.85em">👁️</span>KEBAP</h3>
             <p>Prawdziwy turecki kebab. Mięso z rożna, świeże składniki, sosy domowej roboty. Zamów przez telefon, Glovo lub Pyszne.pl.</p>
         </div>
         <div class="f-links">
