@@ -31,16 +31,17 @@
         .mob-menu a:hover{color:var(--gold)}
         .mob-close{position:absolute;top:20px;right:25px;background:none;border:none;color:var(--t);font-size:2rem;cursor:pointer}
 
-        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:0 5%;overflow:hidden}
-        .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,8,0.3),rgba(12,10,8,0.6) 50%,rgba(12,10,8,0.95));z-index:1}
-        .hero-bg-img{position:absolute;inset:0;background:url('https://glovo.dhmedia.io/image/stores-glovo/stores/8eba8c55f13b4e581c131ea3f3453170a4cf5b0de0f0b3d786d633af5f16e309?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaWxsIiwid2lkdGgiOjEyODAsImhlaWdodCI6MTIwfX0seyJ3ZWJwIjp7InEiOiJsb3cifX1d') center/cover no-repeat;z-index:0}
-        .hero::after{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(212,160,23,0.08),transparent 60%);filter:blur(60px);z-index:0}
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:0 5%;overflow:hidden;background:#0c0a08}
+        .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,8,0.1) 0%,rgba(12,10,8,0.3) 30%,rgba(12,10,8,0.6) 60%,rgba(12,10,8,0.95) 100%);z-index:1}
+        .hero-bg-img{position:absolute;inset:0;background:url('img/hero-bg.jpg') center/cover no-repeat;z-index:0;image-rendering:auto}
+        .hero::after{content:'';position:absolute;top:30%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(212,160,23,0.12),transparent 60%);filter:blur(80px);z-index:0;animation:glow-pulse 6s ease-in-out infinite}
+        @keyframes glow-pulse{0%,100%{opacity:0.6}50%{opacity:1}}
         .hero-content{position:relative;z-index:2}
-        .hero-logo{margin-bottom:20px}
-        .hero-logo img{height:clamp(80px,15vw,140px);filter:drop-shadow(0 0 30px rgba(212,160,23,0.3))}
+        .hero-logo{margin-bottom:25px}
+        .hero-logo img{height:clamp(100px,18vw,160px);filter:drop-shadow(0 0 40px rgba(212,160,23,0.4)) drop-shadow(0 8px 20px rgba(0,0,0,0.5));border-radius:12px}
         .hero-sub{font-size:1rem;color:var(--tm);letter-spacing:4px;text-transform:uppercase;margin-bottom:10px}
-        .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,10vw,7rem);line-height:.85;letter-spacing:6px;margin-bottom:15px;color:var(--gold);text-shadow:0 0 40px rgba(212,160,23,0.3),3px 3px 0 #b8860b}
-        .hero-desc{font-size:1rem;color:var(--tm);line-height:1.7;margin-bottom:30px;max-width:500px;margin-left:auto;margin-right:auto}
+        .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,11vw,8rem);line-height:.85;letter-spacing:8px;margin-bottom:15px;color:var(--gold);text-shadow:0 0 60px rgba(212,160,23,0.4),0 4px 20px rgba(0,0,0,0.8),3px 3px 0 #8b6914}
+        .hero-desc{font-size:1.05rem;color:var(--tm);line-height:1.7;margin-bottom:35px;max-width:500px;margin-left:auto;margin-right:auto}
         .hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
         .btn{padding:16px 32px;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;border:none;cursor:pointer}
         .btn-g{background:linear-gradient(135deg,var(--gold),#b8860b);color:var(--bg);box-shadow:0 4px 25px rgba(212,160,23,0.3)}
